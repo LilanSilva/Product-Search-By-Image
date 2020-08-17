@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-//import { addShipping } from './actions/cartActions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 class Recipe extends Component{
     
     componentWillUnmount() {
@@ -25,10 +25,10 @@ class Recipe extends Component{
                     <li className="collection-item">
                             <label>
                                 <input type="checkbox" ref="shipping" onChange= {this.handleChecked} />
-                                <span>Shipping(+6$)</span>
+                                <span>Shipping(Rs +50)</span>
                             </label>
                         </li>
-                        <li className="collection-item"><b>Total: {this.props.total} $</b></li>
+                    <li className="collection-item"><b>Total: {this.props.total} (Rs)</b></li>
                     </div>
                     <div className="checkout">
                         <button className="waves-effect waves-light btn">Checkout</button>
