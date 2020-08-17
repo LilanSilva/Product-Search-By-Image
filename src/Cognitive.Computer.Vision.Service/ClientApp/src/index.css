@@ -42,3 +42,10 @@
 .item-desc {
     align-self: center;
 }
+
+.serch-by-image {
+    height: 60px;
+    margin-left: 93%;
+    margin-top: -50px;
+    cursor: pointer;
+}

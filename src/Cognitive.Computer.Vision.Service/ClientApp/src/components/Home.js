@@ -1,11 +1,35 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { addToCart } from './actions/cartActions'
+import { connect } from 'react-redux';
+import { addToCart } from './actions/cartActions';
+import ImageUploader from 'react-images-upload';
+
+import SerchByImage from '../images/search-by-image.jpg';
 
 class Home extends Component {
 
-    handleClick = (id) => {
+    constructor(props) {
+        super(props);
+        this.state = { pictures: [] };
+        this.onDrop = this.onDrop.bind(this);
+    }
+
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
+
+    addToBasket = (id) => {
         this.props.addToCart(id);
+    }
+
+    searchByImage = () => {
+        var x = document.getElementById("divImageUploader");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
     }
 
     render() {
@@ -15,7 +39,7 @@ class Home extends Component {
                     <div className="card-image">
                         <img src={item.img} alt={item.title} />
                         <span className="card-title">{item.title}</span>
-                        <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => { this.handleClick(item.id) }}><i className="material-icons">add</i></span>
+                        <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => { this.addToBasket(item.id) }}><i className="material-icons">add</i></span>
                     </div>
 
                     <div className="card-content">
@@ -29,6 +53,18 @@ class Home extends Component {
         return (
             <div className="container">
                 <h3 className="center">Our items</h3>
+                <div id="divSerchByImage">
+                    <img className="serch-by-image" src={SerchByImage} alt="" onClick={() => { this.searchByImage() }} />
+                </div>
+                <div id="divImageUploader" style={{ display: "none" }}>
+                    <ImageUploader
+                        withIcon={true}
+                        buttonText='Choose images'
+                        onChange={this.onDrop}
+                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        maxFileSize={1024000}
+                    />
+                </div>
                 <div className="box">
                     {itemList}
                 </div>
