@@ -19,12 +19,18 @@ class Home extends Component {
         this.props.addToCart(id);
     }
 
-    openFileSelector() {
+    openFileSelector = () => {
         document.getElementById("imageSelector").click();
     }
 
-    async searchByImage(e) {
+    searchByImage = async (e) => {
         e.preventDefault();
+
+        if (e.target.files.length === 0) {
+            return;
+        }
+
+        this.displayLoadingWheel(true);
         let form = new FormData();
         for (var index = 0; index < e.target.files.length; index++) {
             var element = e.target.files[index];
@@ -32,7 +38,8 @@ class Home extends Component {
         }
         form.append('fileName', "Img");
 
-        let serverResponse = await fetch('https://localhost:44305/api/productsearch/byimage',
+        let parentScope = this;
+        fetch('https://localhost:44305/api/productsearch/byimage',
             {
                 method: 'POST',
                 mode: 'cors',
@@ -41,17 +48,21 @@ class Home extends Component {
                 },
                 body: form
             }
-        );
+        ).then((serverResponse) => {
+            serverResponse.json().then(function (data) {
+                var filterItemsByImage = parentScope.state.allItems.filter(function (item) {
+                    return data.includes(item.category);
+                });
 
-        let parentScope = this;
-        serverResponse.json().then(function (data) {
-            var filterItemsByImage = parentScope.state.allItems.filter(function (item) {
-                return data.includes(item.category);
+                parentScope.setState({ filterItems: filterItemsByImage });
+                setTimeout(function () { parentScope.displayLoadingWheel(false); }, 2000);
             });
-
-            parentScope.setState({ filterItems: filterItemsByImage });
         });
     };
+
+    displayLoadingWheel = (visibility) => {
+        document.getElementById("divLoadingWheel").style.display = visibility ? "" : "none";
+    }
 
     render() {
         let itemList = this.state.filterItems.map(item => {
@@ -74,6 +85,7 @@ class Home extends Component {
         return (
             <div className="container">
                 <h3 className="center">Our items</h3>
+                <div id="divLoadingWheel" className="loader" style={{ display: "none" }}></div>
                 <form>
                     <div id="divSerchByImage">
                         <input name="Avatar" style={{ display: "none" }} id='imageSelector' type="file" onChange={(e) => this.searchByImage(e)} />
