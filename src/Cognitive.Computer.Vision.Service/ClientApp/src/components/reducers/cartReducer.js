@@ -58,12 +58,12 @@ const initState = {
         { id: 22, quantity: 0, title: '', category: "watch", desc: "Watch", price: 65000, img: WatchItem01 },
         { id: 23, quantity: 0, title: '', category: "watch", desc: "Smart watch", price: 27500, img: WatchItem02 },
         { id: 24, quantity: 0, title: '', category: "watch", desc: "Clock", price: 7800, img: WatchItem03 },
-        { id: 25, quantity: 0, title: '', category: "shoes", desc: "Winter body", price: 7500, img: ShoesItem1 },
-        { id: 26, quantity: 0, title: '', category: "shoes", desc: "Adidas", price: 7200, img: ShoesItem2 },
-        { id: 27, quantity: 0, title: '', category: "shoes", desc: "Vans", price: 9000, img: ShoesItem3 },
-        { id: 28, quantity: 0, title: '', category: "shoes", desc: "Bessi", price: 12000, img: ShoesItem4 },
-        { id: 29, quantity: 0, title: '', category: "shoes", desc: "Cropped-sho", price: 6500, img: ShoesItem5 },
-        { id: 30, quantity: 0, title: '', category: "shoes", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
+        { id: 25, quantity: 0, title: '', category: "footwear", desc: "Winter body", price: 7500, img: ShoesItem1 },
+        { id: 26, quantity: 0, title: '', category: "footwear", desc: "Adidas", price: 7200, img: ShoesItem2 },
+        { id: 27, quantity: 0, title: '', category: "footwear", desc: "Vans", price: 9000, img: ShoesItem3 },
+        { id: 28, quantity: 0, title: '', category: "footwear", desc: "Bessi", price: 12000, img: ShoesItem4 },
+        { id: 29, quantity: 0, title: '', category: "footwear", desc: "Cropped-sho", price: 6500, img: ShoesItem5 },
+        { id: 30, quantity: 0, title: '', category: "footwear", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
     ],
     filterItems: [
         { id: 4, quantity: 0, title: '', category: "cable", desc: "HDMI cable", price: 2000, img: CableItem01 },
@@ -71,7 +71,7 @@ const initState = {
         { id: 13, quantity: 0, title: '', category: "fan", desc: "Ceiling fan", price: 2500, img: FanItem01 },
         { id: 16, quantity: 0, title: '', category: "headset", desc: "Headset", price: 16000, img: HeadsetItem01 },
         { id: 19, quantity: 0, title: '', category: "phone", desc: "Latest phone", price: 95000, img: PhoneItem01 },
-        { id: 30, quantity: 0, title: '', category: "shoes", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
+        { id: 30, quantity: 0, title: '', category: "footwear", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
     ],
     addedItems: [],
     total: 0

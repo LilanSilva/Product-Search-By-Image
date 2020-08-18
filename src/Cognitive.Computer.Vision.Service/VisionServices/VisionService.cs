@@ -37,7 +37,7 @@ namespace Cognitive.Computer.Vision.Service.VisionServices
         /// <param name="client"></param>
         /// <param name="localImage"></param>
         /// <returns></returns>
-        public async Task<List<string>> AnalyzeImageLocal(ComputerVisionClient client, string localImage)
+        public async Task<List<string>> AnalyzeImageLocal(ComputerVisionClient client, Stream analyzeImageStream)
         {
             // Creating a list that defines the features to be extracted from the image. 
             List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
@@ -46,23 +46,20 @@ namespace Cognitive.Computer.Vision.Service.VisionServices
               VisualFeatureTypes.Objects
             };
 
-            using (Stream analyzeImageStream = File.OpenRead(localImage))
+            // Analyze the local image.
+            ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, features);
+
+            // Objects
+            var serchList = results.Objects.Select(i => i.ObjectProperty.ToLower()).ToList();
+
+            // Image tags and their confidence score
+            if (!serchList.Any() && results.Tags.Count > 3)
             {
-                // Analyze the local image.
-                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, features);
-
-                // Objects
-                var serchList = results.Objects.Select(i => i.ObjectProperty).ToList();
-
-                // Image tags and their confidence score
-                if (!serchList.Any() && results.Tags.Count > 3)
-                {
-                    serchList.Add(results.Tags[0].Name);
-                    serchList.Add(results.Tags[1].Name);
-                }
-
-                return serchList;
+                serchList.Add(results.Tags[0].Name.ToLower());
+                serchList.Add(results.Tags[1].Name.ToLower());
             }
+
+            return serchList;
         }
     }
 }

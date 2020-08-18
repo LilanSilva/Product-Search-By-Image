@@ -46,7 +46,7 @@ class Home extends Component {
         let parentScope = this;
         serverResponse.json().then(function (data) {
             var filterItemsByImage = parentScope.state.allItems.filter(function (item) {
-                return item.category === data;
+                return data.includes(item.category);
             });
 
             parentScope.setState({ filterItems: filterItemsByImage });
