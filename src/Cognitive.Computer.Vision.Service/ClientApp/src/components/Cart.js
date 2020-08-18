@@ -20,9 +20,9 @@ class Cart extends Component {
     }
     render() {
 
-        let addedItems = this.props.items.length ?
+        let addedItems = this.props.filterItems.length ?
             (
-                this.props.items.map(item => {
+                this.props.filterItems.map(item => {
                     return (
 
                         <li className="collection-item avatar" key={item.id}>
@@ -70,7 +70,7 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        items: state.addedItems
+        filterItems: state.addedItems
     }
 }
 const mapDispatchToProps = (dispatch) => {

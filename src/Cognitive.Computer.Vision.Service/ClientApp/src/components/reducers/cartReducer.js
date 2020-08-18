@@ -34,36 +34,44 @@ import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, ADD_SHIPPING } fr
 
 const initState = {
     items: [
-        { id: 1, title: '', category: "banana", desc: "Red banana", price: 100, img: BananaItem01 },
-        { id: 2, title: '', category: "banana", desc: "Dark green banana", price: 80, img: BananaItem02 },
-        { id: 3, title: '', category: "banana", desc: "Light green banana", price: 110, img: BananaItem03 },
-        { id: 4, title: '', category: "cable", desc: "HDMI cable", price: 2000, img: CableItem01 },
-        { id: 5, title: '', category: "cable", desc: "Micro usb cable", price: 700, img: CableItem02 },
-        { id: 6, title: '', category: "cable", desc: "Audio cable", price: 1250, img: CableItem03 },
-        { id: 7, title: '', category: "carrot", desc: "Normal carrot", price: 80, img: CarrotItem01 },
-        { id: 8, title: '', category: "carrot", desc: "Carrot piece", price: 190, img: CarrotItem02 },
-        { id: 9, title: '', category: "carrot", desc: "Long carrot", price: 120, img: CarrotItem03 },
-        { id: 10, title: '', category: "chair", desc: "Office chair", price: 80, img: ChairItem01 },
-        { id: 11, title: '', category: "chair", desc: "Normal chair", price: 190, img: ChairItem02 },
-        { id: 12, title: '', category: "chair", desc: "Child chair", price: 120, img: ChairItem03 },
-        { id: 13, title: '', category: "fan", desc: "Ceiling fan", price: 2500, img: FanItem01 },
-        { id: 14, title: '', category: "fan", desc: "Tabel fan", price: 3750, img: FanItem02 },
-        { id: 15, title: '', category: "fan", desc: "Small fan", price: 2900, img: FanItem03 },
-        { id: 16, title: '', category: "headset", desc: "Headset", price: 16000, img: HeadsetItem01 },
-        { id: 17, title: '', category: "headset", desc: "Bluetooth headset", price: 4500, img: HeadsetItem02 },
-        { id: 18, title: '', category: "headset", desc: "Hands Free", price: 3200, img: HeadsetItem03 },
-        { id: 19, title: '', category: "phone", desc: "Latest phone", price: 95000, img: PhoneItem01 },
-        { id: 20, title: '', category: "phone", desc: "Small phone", price: 30000, img: PhoneItem02 },
-        { id: 21, title: '', category: "phone", desc: "Old phone", price: 4500, img: PhoneItem03 },
-        { id: 22, title: '', category: "watch", desc: "Watch", price: 65000, img: WatchItem01 },
-        { id: 23, title: '', category: "watch", desc: "Smart watch", price: 27500, img: WatchItem02 },
-        { id: 24, title: '', category: "watch", desc: "Clock", price: 7800, img: WatchItem03 },
-        { id: 25, title: '', category: "shoes", desc: "Winter body", price: 7500, img: ShoesItem1 },
-        { id: 26, title: '', category: "shoes", desc: "Adidas", price: 7200, img: ShoesItem2 },
-        { id: 27, title: '', category: "shoes", desc: "Vans", price: 9000, img: ShoesItem3 },
-        { id: 28, title: '', category: "shoes", desc: "Bessi", price: 12000, img: ShoesItem4 },
-        { id: 29, title: '', category: "shoes", desc: "Cropped-sho", price: 6500, img: ShoesItem5 },
-        { id: 30, title: '', category: "shoes", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
+        { id: 1, quantity: 0, title: '', category: "banana", desc: "Red banana", price: 100, img: BananaItem01 },
+        { id: 2, quantity: 0, title: '', category: "banana", desc: "Dark green banana", price: 80, img: BananaItem02 },
+        { id: 3, quantity: 0, title: '', category: "banana", desc: "Light green banana", price: 110, img: BananaItem03 },
+        { id: 4, quantity: 0, title: '', category: "cable", desc: "HDMI cable", price: 2000, img: CableItem01 },
+        { id: 5, quantity: 0, title: '', category: "cable", desc: "Micro usb cable", price: 700, img: CableItem02 },
+        { id: 6, quantity: 0, title: '', category: "cable", desc: "Audio cable", price: 1250, img: CableItem03 },
+        { id: 7, quantity: 0, title: '', category: "carrot", desc: "Normal carrot", price: 80, img: CarrotItem01 },
+        { id: 8, quantity: 0, title: '', category: "carrot", desc: "Carrot piece", price: 190, img: CarrotItem02 },
+        { id: 9, quantity: 0, title: '', category: "carrot", desc: "Long carrot", price: 120, img: CarrotItem03 },
+        { id: 10, quantity: 0, title: '', category: "chair", desc: "Office chair", price: 80, img: ChairItem01 },
+        { id: 11, quantity: 0, title: '', category: "chair", desc: "Normal chair", price: 190, img: ChairItem02 },
+        { id: 12, quantity: 0, title: '', category: "chair", desc: "Child chair", price: 120, img: ChairItem03 },
+        { id: 13, quantity: 0, title: '', category: "fan", desc: "Ceiling fan", price: 2500, img: FanItem01 },
+        { id: 14, quantity: 0, title: '', category: "fan", desc: "Tabel fan", price: 3750, img: FanItem02 },
+        { id: 15, quantity: 0, title: '', category: "fan", desc: "Small fan", price: 2900, img: FanItem03 },
+        { id: 16, quantity: 0, title: '', category: "headset", desc: "Headset", price: 16000, img: HeadsetItem01 },
+        { id: 17, quantity: 0, title: '', category: "headset", desc: "Bluetooth headset", price: 4500, img: HeadsetItem02 },
+        { id: 18, quantity: 0, title: '', category: "headset", desc: "Hands Free", price: 3200, img: HeadsetItem03 },
+        { id: 19, quantity: 0, title: '', category: "phone", desc: "Latest phone", price: 95000, img: PhoneItem01 },
+        { id: 20, quantity: 0, title: '', category: "phone", desc: "Small phone", price: 30000, img: PhoneItem02 },
+        { id: 21, quantity: 0, title: '', category: "phone", desc: "Old phone", price: 4500, img: PhoneItem03 },
+        { id: 22, quantity: 0, title: '', category: "watch", desc: "Watch", price: 65000, img: WatchItem01 },
+        { id: 23, quantity: 0, title: '', category: "watch", desc: "Smart watch", price: 27500, img: WatchItem02 },
+        { id: 24, quantity: 0, title: '', category: "watch", desc: "Clock", price: 7800, img: WatchItem03 },
+        { id: 25, quantity: 0, title: '', category: "shoes", desc: "Winter body", price: 7500, img: ShoesItem1 },
+        { id: 26, quantity: 0, title: '', category: "shoes", desc: "Adidas", price: 7200, img: ShoesItem2 },
+        { id: 27, quantity: 0, title: '', category: "shoes", desc: "Vans", price: 9000, img: ShoesItem3 },
+        { id: 28, quantity: 0, title: '', category: "shoes", desc: "Bessi", price: 12000, img: ShoesItem4 },
+        { id: 29, quantity: 0, title: '', category: "shoes", desc: "Cropped-sho", price: 6500, img: ShoesItem5 },
+        { id: 30, quantity: 0, title: '', category: "shoes", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
+    ],
+    filterItems: [
+        { id: 4, quantity: 0, title: '', category: "cable", desc: "HDMI cable", price: 2000, img: CableItem01 },
+        { id: 9, quantity: 0, title: '', category: "carrot", desc: "Long carrot", price: 120, img: CarrotItem03 },
+        { id: 13, quantity: 0, title: '', category: "fan", desc: "Ceiling fan", price: 2500, img: FanItem01 },
+        { id: 16, quantity: 0, title: '', category: "headset", desc: "Headset", price: 16000, img: HeadsetItem01 },
+        { id: 19, quantity: 0, title: '', category: "phone", desc: "Latest phone", price: 95000, img: PhoneItem01 },
+        { id: 30, quantity: 0, title: '', category: "shoes", desc: "Normal shoes", price: 4200, img: ShoesItem6 }
     ],
     addedItems: [],
     total: 0
@@ -73,7 +81,8 @@ const cartReducer = (state = initState, action) => {
 
     //INSIDE HOME COMPONENT
     if (action.type === ADD_TO_CART) {
-        let addedItem = state.items.find(item => item.id === action.id)
+        debugger;
+        let addedItem = state.filterItems.find(item => item.id === action.id)
         //check if the action id exists in the addedItems
         let existed_item = state.addedItems.find(item => action.id === item.id)
         if (existed_item) {
@@ -111,7 +120,7 @@ const cartReducer = (state = initState, action) => {
     }
     //INSIDE CART COMPONENT
     if (action.type === ADD_QUANTITY) {
-        let addedItem = state.items.find(item => item.id === action.id)
+        let addedItem = state.filterItems.find(item => item.id === action.id)
         addedItem.quantity += 1
         let newTotal = state.total + addedItem.price
         return {
@@ -120,7 +129,7 @@ const cartReducer = (state = initState, action) => {
         }
     }
     if (action.type === SUB_QUANTITY) {
-        let addedItem = state.items.find(item => item.id === action.id)
+        let addedItem = state.filterItems.find(item => item.id === action.id)
         //if the qt == 0 then it should be removed
         if (addedItem.quantity === 1) {
             let new_items = state.addedItems.filter(item => item.id !== action.id)

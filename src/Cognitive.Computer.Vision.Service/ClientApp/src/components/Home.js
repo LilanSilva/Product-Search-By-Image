@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from './actions/cartActions';
-import ImageUploader from 'react-images-upload';
 
 import SerchByImage from '../images/search-by-image.jpg';
 
@@ -9,31 +8,53 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { pictures: [] };
-        this.onDrop = this.onDrop.bind(this);
-    }
 
-    onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
+        this.state = {
+            filterItems: props.filterItems,
+            allItems: props.items
+        }
     }
 
     addToBasket = (id) => {
         this.props.addToCart(id);
     }
 
-    searchByImage = () => {
-        var x = document.getElementById("divImageUploader");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+    openFileSelector() {
+        document.getElementById("imageSelector").click();
     }
 
+    async searchByImage(e) {
+        e.preventDefault();
+        let form = new FormData();
+        for (var index = 0; index < e.target.files.length; index++) {
+            var element = e.target.files[index];
+            form.append('image', element);
+        }
+        form.append('fileName', "Img");
+
+        let serverResponse = await fetch('https://localhost:44305/api/productsearch/byimage',
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: form
+            }
+        );
+
+        let parentScope = this;
+        serverResponse.json().then(function (data) {
+            var filterItemsByImage = parentScope.state.allItems.filter(function (item) {
+                return item.category === data;
+            });
+
+            parentScope.setState({ filterItems: filterItemsByImage });
+        });
+    };
+
     render() {
-        let itemList = this.props.items.map(item => {
+        let itemList = this.state.filterItems.map(item => {
             return (
                 <div className="card" key={item.id}>
                     <div className="card-image">
@@ -53,18 +74,12 @@ class Home extends Component {
         return (
             <div className="container">
                 <h3 className="center">Our items</h3>
-                <div id="divSerchByImage">
-                    <img className="serch-by-image" src={SerchByImage} alt="" onClick={() => { this.searchByImage() }} />
-                </div>
-                <div id="divImageUploader" style={{ display: "none" }}>
-                    <ImageUploader
-                        withIcon={true}
-                        buttonText='Choose images'
-                        onChange={this.onDrop}
-                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                        maxFileSize={1024000}
-                    />
-                </div>
+                <form>
+                    <div id="divSerchByImage">
+                        <input name="Avatar" style={{ display: "none" }} id='imageSelector' type="file" onChange={(e) => this.searchByImage(e)} />
+                        <img className="serch-by-image" src={SerchByImage} alt="" onClick={() => { this.openFileSelector() }} />
+                    </div>
+                </form>
                 <div className="box">
                     {itemList}
                 </div>
@@ -72,8 +87,10 @@ class Home extends Component {
         )
     }
 }
+
 const mapStateToProps = (state) => {
     return {
+        filterItems: state.filterItems,
         items: state.items
     }
 }
